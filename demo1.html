@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        #hello {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    ReactDOM.render(
+        /**
+         * React.DOM.div为系统自带组件
+         * 第一个参数为组件属性，为json格式
+         * 后面参数为组件的内容
+         * 组件内部可以嵌套多个组件
+         */
+        React.DOM.div(
+            {id: "hello"},
+            "Hello World",
+            React.DOM.h3(null, "Hello jack"),
+            React.DOM.img({src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1519753778086&di=f829274d5de72f591c6c2825dcaf7639&imgtype=0&src=http%3A%2F%2Fimages.liqucn.com%2Fimg%2Fh1%2Fh892%2F20170109131157_3131.jpg"})),
+        //声明组件嵌套的位置
+        document.getElementById('app')
+    );
+</script>
+</body>
+</html>

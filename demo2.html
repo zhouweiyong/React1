@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义组件</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    /**
+     * 该自定义组件顶层元素为一个div
+     * 嵌套一个h1标签和一个img标签
+     */
+    var Component1 = React.createClass({
+        render: function () {
+            return React.DOM.div(null,
+                    React.DOM.h1({
+                        style: {
+                            color: "red"
+                        }
+                    }, "自定义组件"),
+                    React.DOM.img({src: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1520349385&di=ecc4ebe8f88d7025269d810be50a1cf7&imgtype=jpg&er=1&src=http%3A%2F%2Fg.hiphotos.baidu.com%2Fzhidao%2Fpic%2Fitem%2F9a504fc2d5628535933cee7d98ef76c6a6ef6389.jpg"})
+            );
+        }
+    });
+    ReactDOM.render(
+            React.createElement(Component1),
+            document.getElementById("app")
+    );
+</script>
+</body>
+</html>

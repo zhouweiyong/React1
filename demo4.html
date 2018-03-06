@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>state</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <style>
+        .area {
+            width: 200px;
+            height: 100px;
+            background: antiquewhite;
+        }
+    </style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    var TextAreaCounter = React.createClass({
+            //声明传入的参数
+            propTypes: {
+                msg: React.PropTypes.string,
+            },
+            //初始化state
+            getInitialState: function () {
+                return {
+                    text: this.props.msg
+                };
+            },
+            //监听变化，同时根据变化设置state
+            textChange: function (ev) {
+                this.setState({
+                    text: ev.target.value
+                })
+            },
+            //传入的参数改变时候触发
+            componentWillReceiveProps: function (newProps) {
+                console.log("componentWillReceiveProps");
+                this.setState({
+                    text: newProps.msg
+                })
+            },
+            render: function () {
+                return React.DOM.div(null,
+                    React.DOM.textarea(
+                        {
+                            className: "area",
+                            value: this.state.text,
+                            //监听变化
+                            onChange: this.textChange
+                        }
+                    ),
+                    //显示state中的文本长度，是一个变化的值
+                    React.DOM.h1(null, this.state.text.length)
+                )
+            }
+        })
+    ;
+    var myTextAreaCounter = ReactDOM.render(
+        React.createElement(TextAreaCounter, {msg: "hello"}),
+        document.getElementById("app")
+    );
+    //传入新的参数
+    myTextAreaCounter = ReactDOM.render(
+        React.createElement(TextAreaCounter, {msg: "nannnn"}),
+        document.getElementById("app")
+    );
+</script>
+</body>
+</html>

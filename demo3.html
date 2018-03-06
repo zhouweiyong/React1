@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>带参数自定义组件</title>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+</head>
+<body>
+<div id="app"></div>
+<script>
+    var com1 = React.createClass({
+        //声明参数
+        propTypes: {
+            name: React.PropTypes.string.isRequired,
+            sex: React.PropTypes.string,
+            age: React.PropTypes.number.isRequired
+        },
+        //设置参数默认值
+        getDefaultProps: function () {
+            return {
+                sex: "女",
+                age: 10
+            };
+        },
+        //带参数的自定义组件
+        render: function () {
+            return React.DOM.h1(null, "my name is " + this.props.name + this.props.sex + this.props.age);
+        }
+    });
+    //渲染组件到dom
+    ReactDOM.render(
+        React.createElement(com1, {name: "tom", sex: "男", age: 16}),
+        document.getElementById("app")
+    );
+
+</script>
+</body>
+</html>
