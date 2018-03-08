@@ -18,6 +18,49 @@
 <div id="app"></div>
 <script>
     var TextAreaCounter = React.createClass({
+            _log: function (methodName, args) {
+                console.log(methodName, args);
+            },
+            //在新节点插入 DOM 结构之前触发。
+            componentWillMount: function () {
+                this._log('componentWillMount', arguments);
+            },
+            //在新节点插入 DOM 结构之后触发。
+            componentDidMount: function () {
+                this._log('componentDidMount', arguments);
+            },
+            /**
+             *这个方法在 componentWillUpdate() 之前触发，给你一个机会返回 false 以取消更新组 件，
+             * 这意味着 render() 方法将不会被调用。
+             */
+            shouldComponentUpdate: function (newProps, newState) {
+                this._log("shouldComponentUpdate", arguments);
+                return true;
+            },
+            //当你的组件再次渲染时，在 render() 方法前调用(在组件的 props 或者 state 发生改变 时会触发该方法)。
+            componentWillUpdate: function () {
+                this._log("componentWillUpdate", arguments);
+            },
+            //当你的组件再次渲染时，在 render() 函数执行完毕，且更新的组件已被同步到 DOM 后立即调用。该方法不会 在初始化渲染时触发。
+            componentDidUpdate: function (oldProps, oldState) {
+                this._log('componentDidUpdate', arguments);
+                //如果新的state文本长度大于8，则恢复为改变前的state
+                if (this.state.text.length > 8) {
+                    this.replaceState(oldState);
+                }
+            },
+
+            //在组件从 DOM 中移除时立刻触发。
+            componentWillUnmount: function () {
+                this._log('componentWillUnmount', arguments);
+            },
+            //传入的参数改变时候触发
+            componentWillReceiveProps: function (newProps) {
+                this._log('componentWillReceiveProps', arguments);
+                this.setState({
+                    text: newProps.msg
+                })
+            },
             //声明传入的参数
             propTypes: {
                 msg: React.PropTypes.string,
@@ -34,13 +77,7 @@
                     text: ev.target.value
                 })
             },
-            //传入的参数改变时候触发
-            componentWillReceiveProps: function (newProps) {
-                console.log("componentWillReceiveProps");
-                this.setState({
-                    text: newProps.msg
-                })
-            },
+
             render: function () {
                 return React.DOM.div(null,
                     React.DOM.textarea(
